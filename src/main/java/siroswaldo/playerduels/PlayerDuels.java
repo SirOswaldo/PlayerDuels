@@ -1,10 +1,14 @@
 package siroswaldo.playerduels;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import siroswaldo.playerduels.commands.DuelPetition;
 import siroswaldo.playerduels.commands.PlayerDuelsAdmin;
 import siroswaldo.playerduels.util.yaml.Yaml;
 
 public final class PlayerDuels extends JavaPlugin {
+
+    //commands
+    private DuelPetition duelPetition = new DuelPetition(this);
 
     private Yaml configuration = new Yaml(this, "configuration");
     private Yaml messages = new Yaml(this, "messages");
@@ -21,7 +25,11 @@ public final class PlayerDuels extends JavaPlugin {
     }
 
     private void registerCommands(){
-        getCommand("playerduelsadmin").setExecutor(new PlayerDuelsAdmin(this));
+        getCommand("playerduelsadmin").setExecutor(duelPetition);
+    }
+
+    public DuelPetition getDuelPetition() {
+        return duelPetition;
     }
 
     private void registerYamls(){

@@ -25,6 +25,8 @@ public class PlayerDuelsAdmin implements CommandExecutor {
                 case "reload":
                     playerDuels.getConfiguration().reloadFile();
                     playerDuels.getMessages().reloadFile();
+                    playerDuels.getDuelPetition().getSenders().clear();
+                    playerDuels.getDuelPetition().getReceivers().clear();
                     messages = playerDuels.getMessages().getFileConfiguration();
                     prefix = messages.getString("prefix");
                     StringMessage reloadComplete = new StringMessage(prefix + messages.getString("reloadComplete"));
