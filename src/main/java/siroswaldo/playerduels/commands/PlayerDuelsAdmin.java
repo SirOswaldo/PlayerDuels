@@ -29,7 +29,7 @@ public class PlayerDuelsAdmin implements CommandExecutor {
                     playerDuels.getDuelPetition().getReceivers().clear();
                     messages = playerDuels.getMessages().getFileConfiguration();
                     prefix = messages.getString("prefix");
-                    StringMessage reloadComplete = new StringMessage(prefix + messages.getString("reloadComplete"));
+                    StringMessage reloadComplete = new StringMessage(prefix + messages.getString("playerDuelsAdmin.reloadComplete"));
                     sender.sendMessage(reloadComplete.addColor());
                     break;
                 case "version":
@@ -41,12 +41,12 @@ public class PlayerDuelsAdmin implements CommandExecutor {
                     version.sendMessage(sender);
                     break;
                 default:
-                    StringMessage invalidArgument = new StringMessage(prefix + messages.getString("invalidArgument"));
+                    StringMessage invalidArgument = new StringMessage(prefix + messages.getString("playerDuelsAdmin.invalidArgument"));
                     sender.sendMessage(invalidArgument.addColor());
                     break;
             }
         } else {
-            StringMessage noArgument = new StringMessage(prefix + messages.getString("noArgument"));
+            StringMessage noArgument = new StringMessage(prefix + messages.getString("playerDuelsAdmin.noArgument"));
             sender.sendMessage(noArgument.addColor());
         }
         return true;

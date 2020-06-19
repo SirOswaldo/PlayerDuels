@@ -11,6 +11,33 @@ commands:
     permission: playerduels.admin
     aliases:
       - pda
+  duelpetition:
+    description: can send duels petitions with this command!
+    permission: playerduels.duelpetition
+    aliases:
+      - duelp
+      - dpetition
+      - dp
+  duelaccept:
+    description: can accept duels with this command!
+    permission: playerduels.duelaccept
+    aliases:
+      - duela
+      - daccept
+      - da
+  duelreject:
+    description: can reject duels witch this command!
+    permission: playerduels.duelreject
+    aliases:
+      - duelr
+      - dreject
+      - dr
 permissions:
   playerduels.admin:
     description: admin permission!
+  playerduels.duelpetition:
+    description: can execute duelpetition command!
+  playerduels.duelaccept:
+    description: can execute duelaccept command!
+  playerduels.duelreject:
+    description: can execute duelreject command!

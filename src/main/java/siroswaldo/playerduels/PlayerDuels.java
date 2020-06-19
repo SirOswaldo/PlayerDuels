@@ -1,17 +1,18 @@
 package siroswaldo.playerduels;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import siroswaldo.playerduels.commands.DuelPetition;
-import siroswaldo.playerduels.commands.PlayerDuelsAdmin;
+import siroswaldo.playerduels.commands.*;
 import siroswaldo.playerduels.util.yaml.Yaml;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public final class PlayerDuels extends JavaPlugin {
 
-    //commands
-    private DuelPetition duelPetition = new DuelPetition(this);
+    private final Yaml configuration = new Yaml(this, "configuration");
+    private final Yaml messages = new Yaml(this, "messages");
 
-    private Yaml configuration = new Yaml(this, "configuration");
-    private Yaml messages = new Yaml(this, "messages");
+    private final HashMap<UUID, UUID> petitions = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -25,11 +26,10 @@ public final class PlayerDuels extends JavaPlugin {
     }
 
     private void registerCommands(){
-        getCommand("playerduelsadmin").setExecutor(duelPetition);
-    }
-
-    public DuelPetition getDuelPetition() {
-        return duelPetition;
+        getCommand("playerduelsadmin").setExecutor(new PlayerDuelsAdmin(this));
+        getCommand("duelpetition").setExecutor(new DuelPetition(this));
+        getCommand("duelaccept").setExecutor(new DuelAccept(this));
+        getCommand("duelreject").setExecutor(new DuelReject(this));
     }
 
     private void registerYamls(){
@@ -43,5 +43,9 @@ public final class PlayerDuels extends JavaPlugin {
 
     public Yaml getMessages() {
         return messages;
+    }
+
+    public HashMap<UUID, UUID> getPetitions() {
+        return petitions;
     }
 }

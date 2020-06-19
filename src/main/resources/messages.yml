@@ -1,11 +1,20 @@
 prefix: "&bPlayer&9Duels &7>>>"
-noArgument: "&cNo argument found!"
-invalidArgument: "&cInvalid argument!"
-reloadComplete: "&aReload complete!"
+playerDuelsAdmin:
+  noArgument: "&cNo argument found!"
+  invalidArgument: "&cInvalid argument!"
+  reloadComplete: "&aReload complete!"
 duelPetition:
   senderIsConsole: "&cOnly one player can use this command!"
   noPlayerName: "&cThe player name is empty!"
   invalidPlayerName: "&cThe player name is invalid or player is offline!"
-  alreadySent: "&cYou already sent a request to this player!"
+  alreadySendThis: "&cYou already sent a request to this player!"
   sended: "&aPetition has been sended to &e%challenged%&a!"
   received: "&aYou have received a request from &e%challenger% &ato fight with you in a duel!"
+duelAccept:
+  senderIsConsole: "&cOnly one player can use this command!"
+  noPetition: "&cYou no have request"
+  challengerDisconnected: "&cChallenger has disconnected!"
+duelReject:
+  senderIsConsole: "&cOnly one player can use this command!"
+  noPetition: "&cYou no have request"
+  rejected: "&aPetition rejected!"
