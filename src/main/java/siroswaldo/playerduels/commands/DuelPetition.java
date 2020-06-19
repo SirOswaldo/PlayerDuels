@@ -8,19 +8,12 @@ import org.bukkit.entity.Player;
 import siroswaldo.playerduels.PlayerDuels;
 import siroswaldo.playerduels.util.message.StringMessage;
 
-import java.util.HashMap;
-import java.util.UUID;
-
 public class DuelPetition implements CommandExecutor {
 
     private final PlayerDuels playerDuels;
-    private final HashMap<UUID, UUID> senders;
-    private final HashMap<UUID, UUID> receivers;
 
     public DuelPetition(PlayerDuels playerDuels) {
         this.playerDuels = playerDuels;
-        senders = new HashMap<>();
-        receivers = new HashMap<>();
     }
 
     @Override
@@ -36,13 +29,12 @@ public class DuelPetition implements CommandExecutor {
                     StringMessage invalidPlayerName = new StringMessage(prefix + messages.getString("duelPetition.invalidPlayerName"));
                     sender.sendMessage(invalidPlayerName.addColor());
                 } else {
-                    if (receivers.containsKey(challenged.getUniqueId())){
-                        if (receivers.get(challenged.getUniqueId()).equals(challenger.getUniqueId())){
-                            StringMessage alreadySent = new StringMessage(prefix + messages.getString("duelPetition.alreadySent"));
-                            challenger.sendMessage(alreadySent.addColor());
+                    if (playerDuels.getPetitions().containsKey(challenged.getUniqueId())){
+                        if (playerDuels.getPetitions().get(challenged.getUniqueId()).equals(challenger.getUniqueId())){
+                            StringMessage alreadySendThis = new StringMessage(prefix + messages.getString("duelPetition.alreadySendThis"));
+                            challenger.sendMessage(alreadySendThis.addColor());
                         } else {
-                            senders.put(challenger.getUniqueId(), challenged.getUniqueId());
-                            receivers.put(challenged.getUniqueId(), challenger.getUniqueId());
+                            playerDuels.getPetitions().put(challenged.getUniqueId(), challenger.getUniqueId());
                             StringMessage sended = new StringMessage(prefix + messages.getString("duelPetition.sended"));
                             sended.replaceAll("%challenged%", challenged.getName());
                             challenger.sendMessage(sended.addColor());
@@ -51,8 +43,7 @@ public class DuelPetition implements CommandExecutor {
                             challenged.sendMessage(received.addColor());
                         }
                     } else {
-                        senders.put(challenger.getUniqueId(), challenged.getUniqueId());
-                        receivers.put(challenged.getUniqueId(), challenger.getUniqueId());
+                        playerDuels.getPetitions().put(challenged.getUniqueId(), challenger.getUniqueId());
                         StringMessage sended = new StringMessage(prefix + messages.getString("duelPetition.sended"));
                         sended.replaceAll("%challenged%", challenged.getName());
                         challenger.sendMessage(sended.addColor());
@@ -70,14 +61,5 @@ public class DuelPetition implements CommandExecutor {
             sender.sendMessage(senderIsConsole.addColor());
         }
         return true;
-    }
-
-
-    public HashMap<UUID, UUID> getReceivers() {
-        return receivers;
-    }
-
-    public HashMap<UUID, UUID> getSenders() {
-        return senders;
     }
 }
