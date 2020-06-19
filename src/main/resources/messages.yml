@@ -1,0 +1,4 @@
+prefix: "&bPlayer&9Duels &7>>>"
+noArgument: "&cNo argument found!"
+invalidArgument: "&cInvalid argument!"
+reloadComplete: "&aReload complete!"

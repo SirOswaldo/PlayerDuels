@@ -1,8 +1,16 @@
 name: PlayerDuels
-version: @version@
+version: 1.0.0
 main: siroswaldo.playerduels.PlayerDuels
 api-version: 1.13
-prefix: PD
 authors: [SirOswaldo]
 description: Reta a otros jugadores a un duelo!
 website: https://kayteam.org
+commands:
+  playerduelsadmin:
+    description: admin command!
+    permission: playerduels.admin
+    aliases:
+      - pda
+permissions:
+  playerduels.admin:
+    description: admin permission!
