@@ -6,6 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import siroswaldo.playerduels.PlayerDuels;
+import siroswaldo.playerduels.events.DuelPetitionReceivedEvent;
+import siroswaldo.playerduels.events.DuelPetitionSendEvent;
 import siroswaldo.playerduels.util.message.StringMessage;
 
 public class DuelPetition implements CommandExecutor {
@@ -34,22 +36,38 @@ public class DuelPetition implements CommandExecutor {
                             StringMessage alreadySendThis = new StringMessage(prefix + messages.getString("duelPetition.alreadySendThis"));
                             challenger.sendMessage(alreadySendThis.addColor());
                         } else {
-                            playerDuels.getPetitions().put(challenged.getUniqueId(), challenger.getUniqueId());
+                            DuelPetitionSendEvent duelPetitionSendEvent = new DuelPetitionSendEvent(challenger, challenged);
+                            playerDuels.getServer().getPluginManager().callEvent(duelPetitionSendEvent);
+                            if (!duelPetitionSendEvent.isCancelled()){
+                                StringMessage sended = new StringMessage(prefix + messages.getString("duelPetition.sended"));
+                                sended.replaceAll("%challenged%", challenged.getName());
+                                challenger.sendMessage(sended.addColor());
+                                DuelPetitionReceivedEvent duelPetitionReceivedEvent = new DuelPetitionReceivedEvent(challenger, challenged);
+                                playerDuels.getServer().getPluginManager().callEvent(duelPetitionReceivedEvent);
+                                if (!duelPetitionReceivedEvent.isCancelled()){
+                                    playerDuels.getPetitions().put(challenged.getUniqueId(), challenger.getUniqueId());
+                                    StringMessage received = new StringMessage(prefix + messages.getString("duelPetition.received"));
+                                    received.replaceAll("%challenger%", challenger.getName());
+                                    challenged.sendMessage(received.addColor());
+                                }
+                            }
+                        }
+                    } else {
+                        DuelPetitionSendEvent duelPetitionSendEvent = new DuelPetitionSendEvent(challenger, challenged);
+                        playerDuels.getServer().getPluginManager().callEvent(duelPetitionSendEvent);
+                        if (!duelPetitionSendEvent.isCancelled()){
                             StringMessage sended = new StringMessage(prefix + messages.getString("duelPetition.sended"));
                             sended.replaceAll("%challenged%", challenged.getName());
                             challenger.sendMessage(sended.addColor());
-                            StringMessage received = new StringMessage(prefix + messages.getString("duelPetition.received"));
-                            received.replaceAll("%challenger%", challenger.getName());
-                            challenged.sendMessage(received.addColor());
+                            DuelPetitionReceivedEvent duelPetitionReceivedEvent = new DuelPetitionReceivedEvent(challenger, challenged);
+                            playerDuels.getServer().getPluginManager().callEvent(duelPetitionReceivedEvent);
+                            if (!duelPetitionReceivedEvent.isCancelled()){
+                                playerDuels.getPetitions().put(challenged.getUniqueId(), challenger.getUniqueId());
+                                StringMessage received = new StringMessage(prefix + messages.getString("duelPetition.received"));
+                                received.replaceAll("%challenger%", challenger.getName());
+                                challenged.sendMessage(received.addColor());
+                            }
                         }
-                    } else {
-                        playerDuels.getPetitions().put(challenged.getUniqueId(), challenger.getUniqueId());
-                        StringMessage sended = new StringMessage(prefix + messages.getString("duelPetition.sended"));
-                        sended.replaceAll("%challenged%", challenged.getName());
-                        challenger.sendMessage(sended.addColor());
-                        StringMessage received = new StringMessage(prefix + messages.getString("duelPetition.received"));
-                        received.replaceAll("%challenger%", challenger.getName());
-                        challenged.sendMessage(received.addColor());
                     }
                 }
             } else {
