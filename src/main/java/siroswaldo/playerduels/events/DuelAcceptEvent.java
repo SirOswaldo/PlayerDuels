@@ -26,6 +26,11 @@ public class DuelAcceptEvent extends Event implements Cancellable {
         return challenged;
     }
 
+    @Override
+    public String getEventName() {
+        return "DuelAcceptEvent";
+    }
+
     public static HandlerList getHandlerList() {
         return handlerList;
     }
