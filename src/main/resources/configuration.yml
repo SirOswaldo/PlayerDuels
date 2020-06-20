@@ -1,3 +1,5 @@
+petition:
+  duration: 120
 arenas:
   name:
     locations:
