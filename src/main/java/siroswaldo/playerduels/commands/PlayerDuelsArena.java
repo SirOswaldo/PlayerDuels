@@ -54,8 +54,8 @@ public class PlayerDuelsArena implements CommandExecutor {
                         if (args.length > 1){
                             if (playerDuels.getArenas().containsKey(args[1])){
                                 Arena arena = playerDuels.getArenas().get(args[1]);
-                                if (arena.getStatus().equals("WAITING")){
-                                    arena.setStatus("EDITING");
+                                if (arena.getStatus().equals("waiting")){
+                                    arena.setStatus("editing");
                                     ArenaEditorInventory arenaEditorInventory = new ArenaEditorInventory(playerDuels, player, arena);
                                     arenaEditorInventory.openInventory();
                                 } else {

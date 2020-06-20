@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import siroswaldo.playerduels.arena.Arena;
 import siroswaldo.playerduels.commands.*;
+import siroswaldo.playerduels.duel.Duel;
 import siroswaldo.playerduels.inventories.arenaditor.ArenaEditorListener;
 import siroswaldo.playerduels.util.inventory.InventoryData;
 import siroswaldo.playerduels.util.yaml.Yaml;
@@ -22,6 +23,7 @@ public final class PlayerDuels extends JavaPlugin {
 
     private final HashMap<UUID, UUID> petitions = new HashMap<>();
     private final HashMap<String, Arena> arenas = new HashMap<>();
+    private final HashMap<UUID, Duel> duels = new HashMap<>();
 
     private final HashMap<UUID, InventoryData> inventoryData = new HashMap<>();
 
@@ -31,11 +33,6 @@ public final class PlayerDuels extends JavaPlugin {
         registerArenas();
         registerCommands();
         registerListeners();
-    }
-
-    @Override
-    public void onDisable() {
-
     }
 
     private void registerArenas(){
@@ -182,6 +179,7 @@ public final class PlayerDuels extends JavaPlugin {
 
     private void registerListeners(){
         getServer().getPluginManager().registerEvents(new ArenaEditorListener(this), this);
+        getServer().getPluginManager().registerEvents(new ArenaEditorListener(this), this);
     }
 
     private void registerCommands(){
@@ -197,23 +195,15 @@ public final class PlayerDuels extends JavaPlugin {
         messages.registerFile();
     }
 
-    public Yaml getConfiguration() {
-        return configuration;
-    }
+    public Yaml getConfiguration() { return configuration; }
 
-    public Yaml getMessages() {
-        return messages;
-    }
+    public Yaml getMessages() { return messages; }
 
-    public HashMap<UUID, UUID> getPetitions() {
-        return petitions;
-    }
+    public HashMap<UUID, UUID> getPetitions() { return petitions; }
 
-    public HashMap<String, Arena> getArenas() {
-        return arenas;
-    }
+    public HashMap<String, Arena> getArenas() { return arenas; }
 
-    public HashMap<UUID, InventoryData> getInventoryData() {
-        return inventoryData;
-    }
+    public HashMap<UUID, Duel> getDuels() { return duels; }
+
+    public HashMap<UUID, InventoryData> getInventoryData() { return inventoryData; }
 }

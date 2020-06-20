@@ -1,5 +1,6 @@
 petition:
   duration: 120
+arenaSelector: "challenged" # challenger/challenged/random
 arenas:
   name:
     locations:

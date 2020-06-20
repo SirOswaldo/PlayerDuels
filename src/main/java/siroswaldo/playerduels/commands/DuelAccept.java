@@ -7,7 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import siroswaldo.playerduels.PlayerDuels;
+import siroswaldo.playerduels.duel.Duel;
 import siroswaldo.playerduels.events.DuelAcceptEvent;
+import siroswaldo.playerduels.inventories.arenaselector.ArenaSelectorInventory;
 import siroswaldo.playerduels.util.message.StringMessage;
 
 import java.util.UUID;
@@ -33,7 +35,12 @@ public class DuelAccept implements CommandExecutor {
                     DuelAcceptEvent duelAcceptEvent = new DuelAcceptEvent(challenged.getPlayer(), challenged);
                     playerDuels.getServer().getPluginManager().callEvent(duelAcceptEvent);
                     if (!duelAcceptEvent.isCancelled()){
-
+                        playerDuels.getPetitions().remove(challenged.getUniqueId());
+                        Duel duel = new Duel(challenger.getPlayer(), challenged);
+                        playerDuels.getDuels().put(challenger.getUniqueId(), duel);
+                        playerDuels.getDuels().put(challenged.getUniqueId(), duel);
+                        ArenaSelectorInventory arenaSelectorInventory = new ArenaSelectorInventory(playerDuels, duel);
+                        arenaSelectorInventory.openInventory();
                     }
                 } else {
                     StringMessage challengerDisconnected = new StringMessage(prefix + messages.getString("duelAccept.challengerDisconnected"));

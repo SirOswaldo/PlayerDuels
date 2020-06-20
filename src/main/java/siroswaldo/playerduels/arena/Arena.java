@@ -22,9 +22,9 @@ public class Arena {
         this.challengedLocation = challengedLocation;
         enable = (challengerLocation != null) && (challengedLocation != null);
         if (enable){
-            status = "WAITING";
+            status = "waiting";
         } else {
-            status = "NEED_EDIT";
+            status = "need-edit";
         }
     }
 
