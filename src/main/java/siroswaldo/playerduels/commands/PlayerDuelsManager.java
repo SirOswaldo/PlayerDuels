@@ -8,11 +8,11 @@ import siroswaldo.playerduels.PlayerDuels;
 import siroswaldo.playerduels.util.message.ListMessage;
 import siroswaldo.playerduels.util.message.StringMessage;
 
-public class PlayerDuelsAdmin implements CommandExecutor {
+public class PlayerDuelsManager implements CommandExecutor {
 
     private final PlayerDuels playerDuels;
 
-    public PlayerDuelsAdmin(PlayerDuels playerDuels) {
+    public PlayerDuelsManager(PlayerDuels playerDuels) {
         this.playerDuels = playerDuels;
     }
 
@@ -25,11 +25,11 @@ public class PlayerDuelsAdmin implements CommandExecutor {
                 case "reload":
                     playerDuels.getConfiguration().reloadFile();
                     playerDuels.getMessages().reloadFile();
-                    playerDuels.getDuelPetition().getSenders().clear();
-                    playerDuels.getDuelPetition().getReceivers().clear();
+                    playerDuels.getPetitions().clear();
+                    playerDuels.reloadArenas();
                     messages = playerDuels.getMessages().getFileConfiguration();
                     prefix = messages.getString("prefix");
-                    StringMessage reloadComplete = new StringMessage(prefix + messages.getString("playerDuelsAdmin.reloadComplete"));
+                    StringMessage reloadComplete = new StringMessage(prefix + messages.getString("playerDuelsManager.reloadComplete"));
                     sender.sendMessage(reloadComplete.addColor());
                     break;
                 case "version":
@@ -41,12 +41,12 @@ public class PlayerDuelsAdmin implements CommandExecutor {
                     version.sendMessage(sender);
                     break;
                 default:
-                    StringMessage invalidArgument = new StringMessage(prefix + messages.getString("playerDuelsAdmin.invalidArgument"));
+                    StringMessage invalidArgument = new StringMessage(prefix + messages.getString("playerDuelsManager.invalidArgument"));
                     sender.sendMessage(invalidArgument.addColor());
                     break;
             }
         } else {
-            StringMessage noArgument = new StringMessage(prefix + messages.getString("playerDuelsAdmin.noArgument"));
+            StringMessage noArgument = new StringMessage(prefix + messages.getString("playerDuelsManager.noArgument"));
             sender.sendMessage(noArgument.addColor());
         }
         return true;
