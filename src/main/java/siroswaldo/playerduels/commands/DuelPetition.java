@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import siroswaldo.playerduels.PlayerDuels;
 import siroswaldo.playerduels.events.DuelPetitionReceivedEvent;
 import siroswaldo.playerduels.events.DuelPetitionSendEvent;
+import siroswaldo.playerduels.tasks.PetitionTimer;
 import siroswaldo.playerduels.util.message.StringMessage;
 
 public class DuelPetition implements CommandExecutor {
@@ -49,6 +50,8 @@ public class DuelPetition implements CommandExecutor {
                                     StringMessage received = new StringMessage(prefix + messages.getString("duelPetition.received"));
                                     received.replaceAll("%challenger%", challenger.getName());
                                     challenged.sendMessage(received.addColor());
+                                    PetitionTimer petitionTimer = new PetitionTimer(playerDuels, challenger.getUniqueId(), challenged.getUniqueId());
+                                    petitionTimer.startScheduler();
                                 }
                             }
                         }
@@ -66,6 +69,8 @@ public class DuelPetition implements CommandExecutor {
                                 StringMessage received = new StringMessage(prefix + messages.getString("duelPetition.received"));
                                 received.replaceAll("%challenger%", challenger.getName());
                                 challenged.sendMessage(received.addColor());
+                                PetitionTimer petitionTimer = new PetitionTimer(playerDuels, challenger.getUniqueId(), challenged.getUniqueId());
+                                petitionTimer.startScheduler();
                             }
                         }
                     }

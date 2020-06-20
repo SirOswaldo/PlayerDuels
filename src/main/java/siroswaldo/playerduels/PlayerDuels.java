@@ -126,8 +126,55 @@ public final class PlayerDuels extends JavaPlugin {
         FileConfiguration config = configuration.getFileConfiguration();
         for (String name:arenas.keySet()){
             if (config.contains("arenas." + name)){
-
+                Location hub;
+                Location challenger;
+                Location challenged;
+                if (config.contains("arenas." + name + ".locations.hub")){
+                    double x,y,z;
+                    x = config.getDouble("arenas." + name + ".locations.hub.x");
+                    y = config.getDouble("arenas." + name + ".locations.hub.y");
+                    z = config.getDouble("arenas." + name + ".locations.hub.z");
+                    String worldName = config.getString("arenas." + name + ".locations.hub.world");
+                    World world = getServer().getWorld(worldName);
+                    if (world == null){
+                        continue;
+                    }
+                    hub = new Location(world, x, y, z);
+                } else {
+                    continue;
+                }
+                if (config.contains("arenas." + name + ".locations.challenger")){
+                    double x,y,z;
+                    x = config.getDouble("arenas." + name + ".locations.challenger.x");
+                    y = config.getDouble("arenas." + name + ".locations.challenger.y");
+                    z = config.getDouble("arenas." + name + ".locations.challenger.z");
+                    String worldName = config.getString("arenas." + name + ".locations.challenger.world");
+                    World world = getServer().getWorld(worldName);
+                    if (world == null){
+                        continue;
+                    }
+                    challenger = new Location(world, x, y, z);
+                } else {
+                    continue;
+                }
+                if (config.contains("arenas." + name + ".locations.challenged")){
+                    double x,y,z;
+                    x = config.getDouble("arenas." + name + ".locations.challenged.x");
+                    y = config.getDouble("arenas." + name + ".locations.challenged.y");
+                    z = config.getDouble("arenas." + name + ".locations.challenged.z");
+                    String worldName = config.getString("arenas." + name + ".locations.challenged.world");
+                    World world = getServer().getWorld(worldName);
+                    if (world == null){
+                        continue;
+                    }
+                    challenged = new Location(world, x, y, z);
+                } else {
+                    continue;
+                }
+                Arena arena = new Arena(name, hub, challenger, challenged);
+                arenas.put(name, arena);
             } else {
+
                 arenas.remove(name);
             }
         }
