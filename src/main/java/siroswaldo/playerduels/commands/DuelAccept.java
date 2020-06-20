@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import siroswaldo.playerduels.PlayerDuels;
+import siroswaldo.playerduels.events.DuelAcceptEvent;
 import siroswaldo.playerduels.util.message.StringMessage;
 
 import java.util.UUID;
@@ -29,7 +30,11 @@ public class DuelAccept implements CommandExecutor {
                 UUID challengerUUID = playerDuels.getPetitions().get(challenged.getUniqueId());
                 OfflinePlayer challenger = playerDuels.getServer().getOfflinePlayer(challengerUUID);
                 if (challenger.isOnline()){
+                    DuelAcceptEvent duelAcceptEvent = new DuelAcceptEvent(challenged.getPlayer(), challenged);
+                    playerDuels.getServer().getPluginManager().callEvent(duelAcceptEvent);
+                    if (!duelAcceptEvent.isCancelled()){
 
+                    }
                 } else {
                     StringMessage challengerDisconnected = new StringMessage(prefix + messages.getString("duelAccept.challengerDisconnected"));
                     challenged.sendMessage(challengerDisconnected.addColor());

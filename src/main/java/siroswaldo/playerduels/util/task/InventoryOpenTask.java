@@ -8,21 +8,17 @@ public class InventoryOpenTask extends Task {
 
     private final Player player;
     private final Inventory inventory;
-    private int time;
 
-    public InventoryOpenTask(JavaPlugin plugin,Player player, Inventory inventory, int time) {
-        super(plugin, 20L);
+    public InventoryOpenTask(JavaPlugin plugin,Player player, Inventory inventory) {
+        super(plugin, 10L);
         this.player = player;
         this.inventory = inventory;
-        this.time = time;
     }
 
     public void actions() {
-        if (time == 0){
-            if(player.isOnline()){
-                player.openInventory(inventory);
-            }
+        if(player.isOnline()){
+            player.openInventory(inventory);
+            stopScheduler();
         }
-        time--;
     }
 }

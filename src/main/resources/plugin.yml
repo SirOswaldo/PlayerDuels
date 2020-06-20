@@ -6,10 +6,19 @@ authors: [SirOswaldo]
 description: Reta a otros jugadores a un duelo!
 website: https://kayteam.org
 commands:
-  playerduelsadmin:
-    description: admin command!
+  playerduelsmanager:
+    description: can manage this plugin with this command!
     permission: playerduels.admin
     aliases:
+      - playerduelm
+      - playerdm
+      - pdm
+  playerduelsarena:
+    description: can manage arenas whit this command!
+    permission: playerduels.arena
+    aliases:
+      - playerduelsa
+      - playerda
       - pda
   duelpetition:
     description: can send duels petitions with this command!
@@ -33,11 +42,17 @@ commands:
       - dreject
       - dr
 permissions:
-  playerduels.admin:
-    description: admin permission!
+  playerduels.manager:
+    description: can execute playerduelsadmin command!
+  playerduels.arena:
+    description: can execute playerduelsarena command!
   playerduels.duelpetition:
     description: can execute duelpetition command!
   playerduels.duelaccept:
     description: can execute duelaccept command!
   playerduels.duelreject:
     description: can execute duelreject command!
+    # hacer el apostador
+    # crear task de la peticion
+    # crear sistema de puntos
+    #

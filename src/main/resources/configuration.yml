@@ -1,0 +1,18 @@
+arenas:
+  name:
+    locations:
+      hub:
+        x: 0
+        y: 0
+        z: 0
+        world: "WorldName"
+      challenger:
+        x: 0
+        y: 0
+        z: 0
+        world: "WorldName"
+      challenged:
+        x: 0
+        y: 0
+        z: 0
+        world: "WorldName"

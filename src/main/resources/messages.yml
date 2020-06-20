@@ -1,8 +1,18 @@
 prefix: "&bPlayer&9Duels &7>>>"
-playerDuelsAdmin:
+playerDuelsManager:
   noArgument: "&cNo argument found!"
   invalidArgument: "&cInvalid argument!"
   reloadComplete: "&aReload complete!"
+playerDuelsArena:
+  senderIsConsole: "&cOnly one player can use this command!"
+  noArgument: "&cNo argument found!"
+  invalidArgument: "&cInvalid argument!"
+  createNoName: "&cThe arena name is empty!"
+  createNameAlreadyInUse: "&cThe arena name already in use for other arena!"
+  createComplete: "&aThe arena %arena% created successfully!"
+  editNoName: "&cThe arena name is empty!"
+  editInvalidName: "&cThe arena name is invalid!"
+  editInUseArena: "&cThe arena is in use!"
 duelPetition:
   senderIsConsole: "&cOnly one player can use this command!"
   noPlayerName: "&cThe player name is empty!"
